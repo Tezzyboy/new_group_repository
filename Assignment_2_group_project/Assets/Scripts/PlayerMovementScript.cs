@@ -41,8 +41,8 @@ public class PlayerMovementScript : MonoBehaviour
         //(axisInput + rightKey + leftKey) / 1.5f;
 
         rb.linearVelocity = new Vector2(move * moveSpeed, rb.linearVelocity.y);
-
-        transform.Rotate(0f, 0f, rotationSpeed * Time.deltaTime + Mathf.Sin(Time.time) * 0f);
+        //redundant below
+        //transform.Rotate(0f, 0f, rotationSpeed * Time.deltaTime + Mathf.Sin(Time.time) * 0f);
 
         Vector2 place = transform.localScale;
         
@@ -77,7 +77,7 @@ public class PlayerMovementScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Ground")
+        if (col.gameObject.tag == "newground")
         {
             isGrounded = true;
         }
