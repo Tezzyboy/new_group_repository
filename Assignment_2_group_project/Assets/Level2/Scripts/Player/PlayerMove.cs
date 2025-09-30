@@ -3,25 +3,30 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMove : MonoBehaviour
 {
-    public float moveSpeed = 6f;
+    public float maxSpeed = 6f;
+    public float accel = 30f;       
     public float jumpForce = 12f;
     public LayerMask groundLayer;
 
-    private Rigidbody2D rb;
+    Rigidbody2D rb;
 
-    void Awake()
+    void Awake(){ rb = GetComponent<Rigidbody2D>(); }
+
+    void FixedUpdate()
     {
-        rb = GetComponent<Rigidbody2D>();
+        float h = Input.GetAxisRaw("Horizontal");
+        rb.AddForce(Vector2.right * h * accel, ForceMode2D.Force);
+
+       
+        var v = rb.linearVelocity;
+        v.x = Mathf.Clamp(v.x, -maxSpeed, maxSpeed);
+        rb.linearVelocity = v;
     }
 
     void Update()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        rb.linearVelocity = new Vector2(h * moveSpeed, rb.linearVelocity.y);
-
-     if (Input.GetKeyDown(KeyCode.Space) && IsGrounded()) {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-        }
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
     bool IsGrounded()
