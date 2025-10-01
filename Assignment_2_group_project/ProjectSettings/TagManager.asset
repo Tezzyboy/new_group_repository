@@ -6,11 +6,13 @@ TagManager:
   tags:
   - Ground
   - newground
+  - pickup
+  - platform
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - ground
   - Water
   - UI
   - 
