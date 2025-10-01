@@ -3,14 +3,12 @@ using UnityEngine;
 public class collectsolar : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
+    private Object solobject;
+
+    private void Awake()
+    {   //Store a reference to solarscript 
+        solobject = GetComponent<solarscript>();
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
