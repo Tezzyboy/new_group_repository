@@ -82,5 +82,12 @@ public class PlayerMovementScript : MonoBehaviour
             isGrounded = true;
         }
     }
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("pickup"))
+        {
+            col.gameObject.SetActive(false);
+        }
+    }
 }
    
