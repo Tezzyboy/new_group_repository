@@ -4,11 +4,11 @@ public class trampoline_manager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public float bounceforce = 14f;
-    void On_bounce(Collider2D test)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if (test.CompareTag("Newplayer"))
+        if (collision.CompareTag("Newplayer"))
         {
-            Rigidbody2D rb = test.GetComponent<Rigidbody2D>();
+            Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
 
             if (rb != null)
             {
