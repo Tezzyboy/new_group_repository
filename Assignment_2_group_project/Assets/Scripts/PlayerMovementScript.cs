@@ -22,14 +22,18 @@ public class PlayerMovementScript : MonoBehaviour
     void Start()
     {
         Debug.Log("Human Controller Bad Example");
+        PlayerPrefs.DeleteAll();
+        
 
     }
 
+    
     void Update()
     {
         Debug.Log("Frame " + Time.frameCount);
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        
 
         //If the right key is pressed or d key is pressed add 1 to movement, OR : 0
         float rightKey = (Input.GetKey(KeyCode.RightArrow)) || (Input.GetKey(KeyCode.D)) ? 1f : 0f;

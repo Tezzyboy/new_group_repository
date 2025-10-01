@@ -3,7 +3,7 @@ using UnityEngine;
 public class collectsolar : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private Object solobject;
+    private solarscript solobject;
 
     private void Awake()
     {   //Store a reference to solarscript 
@@ -14,6 +14,7 @@ public class collectsolar : MonoBehaviour
     {
         if (collision.CompareTag("Newplayer"))
         {
+            PlayerPrefs.SetInt(solobject.ID, PlayerPrefs.GetInt(solobject.ID) + 1);
             Destroy(gameObject);
         }
     }
