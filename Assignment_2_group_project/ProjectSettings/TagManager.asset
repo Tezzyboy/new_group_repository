@@ -16,11 +16,11 @@ TagManager:
   - ground
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Ground
+  - Windzone
+  - Camerabounds
+  - Pickup
   - 
   - 
   - 
