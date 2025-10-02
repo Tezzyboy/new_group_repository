@@ -12,10 +12,10 @@ public class TurbineAssembler : MonoBehaviour
     [Range(0f,1f)] public float incompleteAlpha = 0.35f;
 
     [Header("Windzone & Rotor")]
-    public GameObject windZone;   // 完成后开启
-    public Spin rotorSpin;        // 拖拽 TurbineRoot/Rotor（有 Spin 组件）
+    public GameObject windZone;   
+    public Spin rotorSpin;   
     public float targetRPM = 120f;
-    public float rampTime = 1.2f; // 加速到目标转速的时间
+    public float rampTime = 1.2f; 
 
     bool mastDone, nacelleDone, bladeDone;
 
@@ -44,7 +44,7 @@ public class TurbineAssembler : MonoBehaviour
         {
             if (windZone && !windZone.activeSelf) windZone.SetActive(true);
             if (rotorSpin && !rotorSpin.enabled)  StartCoroutine(RampUpSpin());
-            enabled = false;  // 组装完成，不再每帧检查
+            enabled = false;  
         }
     }
 

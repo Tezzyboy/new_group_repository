@@ -4,7 +4,7 @@ using UnityEngine;
 public class FragmentPickup : MonoBehaviour
 {
     public PartType type;
-    [Header("可选")]
+    
    
 
     private bool picked;
