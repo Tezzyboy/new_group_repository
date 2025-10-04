@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2713430571803531342}
   - component: {fileID: 6194332697735595683}
   - component: {fileID: 6919254574456987526}
-  - component: {fileID: 5553416059975863908}
+  - component: {fileID: -7969918517674408396}
   m_Layer: 10
   m_Name: Energy
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -135,7 +135,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.4, y: 0.4}
   m_EdgeRadius: 0
---- !u!114 &5553416059975863908
+--- !u!114 &-7969918517674408396
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,7 +144,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1488792839249392716}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae029a98d134e4fd09b9f73aa4eb6665, type: 3}
+  m_Script: {fileID: 11500000, guid: 30c606568af2b4be3bfcccb811a36eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  value: 5
+  playerTag: Player

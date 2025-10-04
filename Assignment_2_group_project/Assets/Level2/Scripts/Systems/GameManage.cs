@@ -1,99 +1,93 @@
 using UnityEngine;
-using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager I;
 
     [Header("References")]
-    public Transform player;        
-    public Transform defaultSpawn;  
+    public Transform player;
+    public Transform defaultSpawn;
 
-  
-    [Header("Energy / CO₂")]
-    public int energy = 0;
-    public int targetEnergy = 20;     // 达标阈值（通关）
-    public float co2 = 100f;          // 初始CO₂
-    public float co2PerEnergy = 2f;   // 每1能量降低多少CO₂
+    [Header("Energy / CO2")]
+    public int   energy        = 0;     // 当前能量
+    public int   targetEnergy  = 100;   // 目标能量（进度条上限/通关阈值）
+    public float co2           = 100f;  // 初始 CO2
+    public float co2PerEnergy  = 1f;    // 每 +1 能量，CO2 减多少。要“+5能量 -5CO2”就设 1
 
-    [Header("HUD (可选, 可留空)")]
-    public TMP_Text energyText;       // 显示 "Energy x/target"
-    public TMP_Text co2Text;          // 显示 "CO₂ y"
+    [Header("Spawner (optional)")]
+    public EnergySpawner energySpawner;
+    public bool startSpawnerOnTurbineBuilt = true;
 
-    [Header("Spawner 控制(可选)")]
-    public EnergySpawner energySpawner;  // 指向你的点位刷新器
-    public bool startSpawnerOnTurbineBuilt = true; // 风车完成后是否自动开刷
-
-    // ====== 原有 ======
     Vector3 _respawn;
 
-    void Awake(){
+    void Awake()
+    {
         I = this;
         _respawn = defaultSpawn ? defaultSpawn.position : Vector3.zero;
     }
 
-    void Start()  
+    void Start()
     {
-        if (!player) {
+        // 定位玩家
+        if (!player)
+        {
             var p = GameObject.FindGameObjectWithTag("Player");
             if (p) player = p.transform;
         }
-        if (player && defaultSpawn){
-            player.position = defaultSpawn.position;
+        if (player)
+        {
+            player.position = _respawn;
             var rb = player.GetComponent<Rigidbody2D>();
-            if (rb){ rb.linearVelocity = Vector2.zero; rb.angularVelocity = 0f; }
+            if (rb) { rb.linearVelocity = Vector2.zero; rb.angularVelocity = 0f; }
         }
 
-        UpdateEnergyHUD();
+        // 初始化 HUD 数值（避免显示 New Text）
+        HUD.I?.SetEnergy(energy, targetEnergy);  // 比如 "Energy 0/100"
+        HUD.I?.SetCO2(co2);                      // 比如 "CO2 100"
+        // 碎片的 "Parts x/y" 由 PartInventory 在 Awake/Start 或 Add() 时调用 HUD.I.SetParts()
     }
 
+    public void SetCheckpoint(Vector3 pos) => _respawn = pos;
 
-    public void SetCheckpoint(Vector3 pos){ _respawn = pos; }
-
-    public void Respawn(Transform who){
+    public void Respawn(Transform who)
+    {
         who.position = _respawn;
         var rb = who.GetComponent<Rigidbody2D>();
-        if (rb){ rb.linearVelocity = Vector2.zero; rb.angularVelocity = 0f; }
+        if (rb) { rb.linearVelocity = Vector2.zero; rb.angularVelocity = 0f; }
     }
 
     
     public void AddEnergy(int amount)
     {
         if (amount <= 0) return;
-        energy += amount;
-        co2 = Mathf.Max(0f, co2 - amount * co2PerEnergy);
-        UpdateEnergyHUD();
+
+        energy = Mathf.Clamp(energy + amount, 0, targetEnergy);
+        co2 = Mathf.Max(0, co2 - amount);
+
+        HUD.I?.SetEnergy(energy, targetEnergy);
+        HUD.I?.SetCO2(co2);
 
         if (energy >= targetEnergy)
-        {
             OnEnergyGoalReached();
-        }
     }
 
-    public void ResetEnergyAndCO2(int energyValue = 0, float co2Value = -1f)
+    public void ResetEnergyAndCO2(int energyValue = 0, float co2Value = 100f)
     {
         energy = Mathf.Max(0, energyValue);
-        co2 = (co2Value < 0f) ? 100f : co2Value;
-        UpdateEnergyHUD();
+        co2    = Mathf.Clamp(co2Value, 0f, 100f);
+        HUD.I?.SetEnergy(energy, targetEnergy);
+        HUD.I?.SetCO2(co2);
     }
 
-    void UpdateEnergyHUD()
+    public void OnTurbineBuilt()
     {
-        if (energyText) energyText.text = $"Energy {energy}/{targetEnergy}";
-        if (co2Text)    co2Text.text    = $"CO₂ {Mathf.RoundToInt(co2)}";
+        if (startSpawnerOnTurbineBuilt && energySpawner)
+            energySpawner.Begin();
     }
 
     void OnEnergyGoalReached()
     {
         Debug.Log("[GM] Energy goal reached! 关卡完成。");
-        // TODO: 在这里做通关/开门/加载下个关卡等
-        // e.g. SceneManager.LoadScene("LevelSelect");
-    }
-
-   
-    public void OnTurbineBuilt()
-    {
-        if (startSpawnerOnTurbineBuilt && energySpawner)
-            energySpawner.Begin();
+        // TODO: 在这里触发通关流程
     }
 }
