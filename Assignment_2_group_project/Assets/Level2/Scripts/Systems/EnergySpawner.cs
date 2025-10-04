@@ -31,6 +31,19 @@ public class EnergySpawner : MonoBehaviour
         StartCoroutine(Loop());
     }
 
+    public void Stop()
+    {
+    started = false;
+    }
+
+public void ClearAllSpawned()
+    {
+    
+    foreach (var go in GameObject.FindGameObjectsWithTag("Finish"))
+        Destroy(go);
+    alive = 0;
+    }
+
     IEnumerator Loop()
     {
         var wait = new WaitForSeconds(interval);

@@ -9,14 +9,17 @@ public class GameManager : MonoBehaviour
     public Transform defaultSpawn;
 
     [Header("Energy / CO2")]
-    public int   energy        = 0;     // 当前能量
-    public int   targetEnergy  = 100;   // 目标能量（进度条上限/通关阈值）
-    public float co2           = 100f;  // 初始 CO2
-    public float co2PerEnergy  = 1f;    // 每 +1 能量，CO2 减多少。要“+5能量 -5CO2”就设 1
+    public int   energy       = 0;     
+    public int   targetEnergy = 100;   
+    public float co2          = 100f;  
+    public float co2PerEnergy = 1f;    
 
     [Header("Spawner (optional)")]
     public EnergySpawner energySpawner;
     public bool startSpawnerOnTurbineBuilt = true;
+
+    [Header("Win UI")]
+    public WinPanel winPanel;          
 
     Vector3 _respawn;
 
@@ -28,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // 定位玩家
+        
         if (!player)
         {
             var p = GameObject.FindGameObjectWithTag("Player");
@@ -41,10 +44,10 @@ public class GameManager : MonoBehaviour
             if (rb) { rb.linearVelocity = Vector2.zero; rb.angularVelocity = 0f; }
         }
 
-        // 初始化 HUD 数值（避免显示 New Text）
-        HUD.I?.SetEnergy(energy, targetEnergy);  // 比如 "Energy 0/100"
-        HUD.I?.SetCO2(co2);                      // 比如 "CO2 100"
-        // 碎片的 "Parts x/y" 由 PartInventory 在 Awake/Start 或 Add() 时调用 HUD.I.SetParts()
+        
+        HUD.I?.SetEnergy(energy, targetEnergy);
+        HUD.I?.SetCO2(co2);
+    
     }
 
     public void SetCheckpoint(Vector3 pos) => _respawn = pos;
@@ -56,13 +59,13 @@ public class GameManager : MonoBehaviour
         if (rb) { rb.linearVelocity = Vector2.zero; rb.angularVelocity = 0f; }
     }
 
-    
+   
     public void AddEnergy(int amount)
     {
         if (amount <= 0) return;
 
         energy = Mathf.Clamp(energy + amount, 0, targetEnergy);
-        co2 = Mathf.Max(0, co2 - amount);
+        co2    = Mathf.Max(0f, co2 - amount * co2PerEnergy);   
 
         HUD.I?.SetEnergy(energy, targetEnergy);
         HUD.I?.SetCO2(co2);
@@ -87,7 +90,10 @@ public class GameManager : MonoBehaviour
 
     void OnEnergyGoalReached()
     {
-        Debug.Log("[GM] Energy goal reached! 关卡完成。");
-        // TODO: 在这里触发通关流程
+        Debug.Log("[GM] Energy goal reached!");
+
+       
+        if (energySpawner) energySpawner.Stop();
+        if (winPanel) winPanel.Show(energy, targetEnergy, co2);
     }
 }
