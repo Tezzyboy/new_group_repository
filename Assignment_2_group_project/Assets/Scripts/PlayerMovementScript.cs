@@ -14,10 +14,14 @@ public class PlayerMovementScript : MonoBehaviour
 
     public float jumpForce = 7f;
 
-    private bool isGrounded = false;
+        private bool isGrounded = false;
 
     private bool isleft = false;
 
+    //[Header("GroundCheck")]
+    //public Transform groundCheckPos;
+    //public Vector2 groundCheckSize = new Vector2(0.5f, 0.05f);
+    //public LayerMask groundLayer;
 
     void Start()
     {
@@ -78,6 +82,20 @@ public class PlayerMovementScript : MonoBehaviour
 
 
     }
+    //private bool isGrounded()
+    //{
+    //    if(Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundLayer))
+    //    {
+    //        return true;
+    //    }
+    //    return false;
+    //}
+
+    //private void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = Color.white;
+    //    Gizmos.DrawCube(groundCheckPos.position, groundCheckSize);
+    //}
 
     void OnCollisionEnter2D(Collision2D col)
     {
