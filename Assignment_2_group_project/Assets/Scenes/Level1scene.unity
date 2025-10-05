@@ -341,7 +341,7 @@ GameObject:
   m_Component:
   - component: {fileID: 150898757}
   - component: {fileID: 150898758}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeftLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -696,7 +696,7 @@ GameObject:
   m_Component:
   - component: {fileID: 491482234}
   - component: {fileID: 491482235}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RightArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -787,6 +787,7 @@ GameObject:
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
   - component: {fileID: 519420034}
+  - component: {fileID: 519420035}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -959,6 +960,33 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!50 &519420035
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &532637650
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,7 +1177,7 @@ GameObject:
   m_Component:
   - component: {fileID: 536729941}
   - component: {fileID: 536729942}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1318,7 +1346,7 @@ GameObject:
   - component: {fileID: 589570584}
   - component: {fileID: 589570583}
   - component: {fileID: 589570587}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Newplayer
   m_TagString: Newplayer
   m_Icon: {fileID: 0}
@@ -1546,7 +1574,7 @@ GameObject:
   m_Component:
   - component: {fileID: 663274331}
   - component: {fileID: 663274332}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2081,6 +2109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObjectPrefab: {fileID: 1887558178366662088, guid: 032520dedd0c64b62954b2c12215162e, type: 3}
+  totalobjects: 3
 --- !u!114 &1015113711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2696,7 +2725,7 @@ GameObject:
   - component: {fileID: 1274191992}
   - component: {fileID: 1274191991}
   - component: {fileID: 1274191993}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: NewGround
   m_TagString: newground
   m_Icon: {fileID: 0}
@@ -2829,7 +2858,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1539883848}
   - component: {fileID: 1539883849}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2916,7 +2945,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1596783654}
   - component: {fileID: 1596783655}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RightLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
