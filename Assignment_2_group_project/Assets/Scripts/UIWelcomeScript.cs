@@ -50,4 +50,15 @@ public class UIWelcomeScript : MonoBehaviour
         if (image != null)
             image.color = unlocked ? unlockedColor : lockedColor;
     }
+    public void ResetProgress()
+    {
+        PlayerPrefs.DeleteAll();  // Clears all saved keys and values
+        PlayerPrefs.Save();       // Force save the cleared data
+        UpdateLevelButtons();     // Refresh button states on the menu
+
+        // Optional: update prompt text to confirm reset
+        if (promptText != null)
+            promptText.text = "Progress reset! Begin again from Level 1.";
+    }
+
 }
