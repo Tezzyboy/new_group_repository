@@ -18,6 +18,8 @@ public class Player3 : MonoBehaviour
 
     private bool isleft = false;
 
+    public EnergyManager em;
+
     //[Header("GroundCheck")]
     //public Transform groundCheckPos;
     //public Vector2 groundCheckSize = new Vector2(0.5f, 0.05f);
@@ -105,11 +107,12 @@ public class Player3 : MonoBehaviour
             isGrounded = true;
         }
     }
-    private void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("pickup"))
+        if (col.gameObject.CompareTag("pickup"))
         {
             col.gameObject.SetActive(false);
+            em.energyCount++;   
         }
     }
 }
