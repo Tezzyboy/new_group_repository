@@ -68,6 +68,7 @@ public class UpdateUI : MonoBehaviour
             levelCompleteTextObject.SetActive(true);
         }
         PlayerPrefs.SetInt("Level1Completed", 1);
+        PlayerPrefs.Save();
     }
     private IEnumerator ShowInstructionsForTime(float seconds)
     {

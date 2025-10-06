@@ -91,6 +91,8 @@ public class GameManager : MonoBehaviour
     void OnEnergyGoalReached()
     {
         Debug.Log("[GM] Energy goal reached!");
+        PlayerPrefs.SetInt("Level2Completed", 1);
+        PlayerPrefs.Save();
 
        
         if (energySpawner) energySpawner.Stop();
