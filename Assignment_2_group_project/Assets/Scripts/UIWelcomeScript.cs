@@ -1,37 +1,53 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using JetBrains.Annotations;
-using System.Runtime.CompilerServices;
-using System;
 using TMPro;
 using UnityEngine.UI;
-using Unity.VisualScripting;
+
 public class UIWelcomeScript : MonoBehaviour
 {
-    public TextMeshProUGUI output;
-    public TMP_InputField userName;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public GameObject level1button;
-    public GameObject level2button;
-    public GameObject level3button;
+    [Header("UI Elements")]
+    public TextMeshProUGUI promptText;
+    public Button level1Button;
+    public Button level2Button;
+    public Button level3Button;
 
+    [Header("Colors for Locked Levels")]
+    public Color unlockedColor = Color.white;
+    public Color lockedColor = new Color(0.5f, 0.5f, 0.5f, 0.5f); // greyed-out
 
     void Start()
     {
-        level1button.SetActive(false);
-        level2button.SetActive(false);
-        level3button.SetActive(false);
+        UpdateLevelButtons();
     }
 
-    // Update is called once per frame
-
-
-    void ButtonDemo()
+    private void UpdateLevelButtons()
     {
-        output.text = "Welcome " + userName.text;
-        level1button.SetActive(true);
-        level2button.SetActive(true);
-        level3button.SetActive(true);
+        // Level 1 is always unlocked
+        bool level1Unlocked = true;
+        bool level2Unlocked = PlayerPrefs.GetInt("Level1Completed", 0) == 1;
+        bool level3Unlocked = PlayerPrefs.GetInt("Level2Completed", 0) == 1;
+
+        // Update each button's interactable state
+        SetButtonState(level1Button, level1Unlocked);
+        SetButtonState(level2Button, level2Unlocked);
+        SetButtonState(level3Button, level3Unlocked);
+
+        // Set prompt text
+        if (!level2Unlocked)
+            promptText.text = "Begin by selecting Level 1 to start your adventure!";
+        else if (!level3Unlocked)
+            promptText.text = "Great job! Level 2 is now unlocked!";
+        else
+            promptText.text = "All levels unlocked! Choose any to play again!";
+    }
+
+    private void SetButtonState(Button button, bool unlocked)
+    {
+        button.interactable = unlocked;
+        var colors = button.colors;
+        var image = button.GetComponent<Image>();
+
+        // Change button tint based on locked/unlocked
+        if (image != null)
+            image.color = unlocked ? unlockedColor : lockedColor;
     }
 }

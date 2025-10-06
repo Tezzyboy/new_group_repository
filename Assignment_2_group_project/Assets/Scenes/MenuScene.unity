@@ -1834,7 +1834,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Explore the ground
+  m_text: SDG Safari
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2257,11 +2257,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c626350c83c124f0db37e6e341d7bb77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  output: {fileID: 1949058134}
-  userName: {fileID: 245831769}
-  level1button: {fileID: 578527986}
-  level2button: {fileID: 1266188602}
-  level3button: {fileID: 477929270}
+  promptText: {fileID: 1949058134}
+  level1Button: {fileID: 578527988}
+  level2Button: {fileID: 1266188604}
+  level3Button: {fileID: 477929272}
+  unlockedColor: {r: 0.25364897, g: 0.9433962, b: 0.35267842, a: 1}
+  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
 --- !u!224 &1927501223
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2338,7 +2339,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Your Name Here:'
+  m_text: Start with level 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2365,8 +2366,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
