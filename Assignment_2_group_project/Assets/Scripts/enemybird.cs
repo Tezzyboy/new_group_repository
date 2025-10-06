@@ -19,15 +19,25 @@ public class enemybird : MonoBehaviour
         {
             transform.Translate(Vector2.right * speed * Time.deltaTime);
             if (transform.position.x >= rightBound)
-                movingRight = false; // turn left
+                movingRight = false;
+                //FlipSprite(); // turn left
+
         }
-        else   
+        else
         {
             transform.Translate(Vector2.left * speed * Time.deltaTime);
             if (transform.position.x <= leftBound)
                 movingRight = true;
+            //FlipSprite();
+
 
         }
+    }
+    private void FlipSprite()
+    {
+        Vector3 scale = transform.localScale;
+        scale.x *= -1; // Flip horizontally
+        transform.localScale = scale;
     }
     // Update is called once per frame
     private void OnDrawGizmosSelected()

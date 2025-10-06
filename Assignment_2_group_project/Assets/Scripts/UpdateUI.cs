@@ -11,6 +11,10 @@ public class UpdateUI : MonoBehaviour
     [SerializeField] private GameObject ObjectPrefab;
     [SerializeField] private int totalobjects = 3;
     [SerializeField] private GameObject levelCompleteTextObject;
+    [SerializeField] private LevelCompleteController levelCompleteController;
+    [SerializeField] private TextMeshProUGUI instructionText;
+
+
 
     private TextMeshProUGUI UIText;
     private string ObjectID;
@@ -25,6 +29,11 @@ public class UpdateUI : MonoBehaviour
         {
             levelCompleteTextObject.SetActive(false);
         }
+        if (instructionText != null)
+        {
+
+            StartCoroutine(ShowInstructionsForTime(10f));
+        }
     }
 
     private void LateUpdate()
@@ -32,10 +41,20 @@ public class UpdateUI : MonoBehaviour
         int collected = PlayerPrefs.GetInt(ObjectID, 0);
         UIText.text = $"{collected}/{totalobjects}";
 
-        if (collected >= totalobjects && !levelCompleteShown)
+        /*if (collected >= totalobjects && !levelCompleteShown)
         {
             levelCompleteShown = true;
             ShowLevelCompleteMessage();
+        }*/
+        if (collected >= totalobjects && !levelCompleteShown)
+        {
+            levelCompleteShown = true;
+            PlayerPrefs.SetInt("Level1Completed", 1);
+
+            if (levelCompleteController != null)
+                levelCompleteController.Show("Level 1 Completed!");
+            else
+                Debug.LogWarning("LevelCompleteController not assigned");
         }
 
         //UIText.text = PlayerPrefs.GetInt(ObjectID).ToString();
@@ -49,5 +68,11 @@ public class UpdateUI : MonoBehaviour
             levelCompleteTextObject.SetActive(true);
         }
         PlayerPrefs.SetInt("Level1Completed", 1);
+    }
+    private IEnumerator ShowInstructionsForTime(float seconds)
+    {
+        instructionText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(seconds);
+        instructionText.gameObject.SetActive(false);
     }
 }
